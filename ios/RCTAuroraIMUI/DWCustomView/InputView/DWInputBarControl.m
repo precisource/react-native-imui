@@ -79,7 +79,7 @@
         }];
 
     });
-    
+
 }
 //监听删除按键
 - (void)growingTextViewDeleteBackward{
@@ -105,7 +105,7 @@
             strName = [NSString stringWithFormat:@"%@%@",NIMInputAtStartChar,strName];
         }
         NIMInputAtItem *item = [[NIMInputAtItem alloc] init];
-        
+
         item.uid = [person objectForKey:@"userId"];
         item.name = [person objectForKey:@"name"];
         [self.atCache addAtItem:item];
@@ -157,16 +157,16 @@
     _toolView = [[UIView alloc]init];
     _toolView.backgroundColor = toolBackColor;
     [self addSubview:_toolView];
-    
+
     line = [[UIView alloc]init];
     line.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1.0];
     [_toolView addSubview:line];
-    
+
     _showRecordeBtn = [[UIButton alloc]init];
     _showRecordeBtn.tag = DWInputBarControlBtnTypeRecord;
     [_showRecordeBtn addTarget:self action:@selector(clickControlBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [_toolView addSubview:_showRecordeBtn];
-    
+//    [_toolView addSubview:_showRecordeBtn];
+
     _inputGrowView = [[HPGrowingTextView alloc]init];
     _inputGrowView.backgroundColor = toolBackColor;
     _inputGrowView.layer.cornerRadius = 5.0f;
@@ -182,12 +182,12 @@
 //    _inputGrowView.placeholder = @"点击输入文字";
     _inputGrowView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [_toolView addSubview:_inputGrowView];
-    
+
     _recordBtn = [[DWRecordButton alloc]init];
     _recordBtn.textArr = @[@"按住 说话",@"松开 结束",@"松开 取消"];
     _recordBtn.hidden = YES;
-    [_toolView addSubview:_recordBtn];
-    
+//    [_toolView addSubview:_recordBtn];
+
     _showExpressionBtn = [[UIButton alloc]init];
     _showExpressionBtn.tag = DWInputBarControlBtnTypeExpression;
     [_showExpressionBtn addTarget:self action:@selector(clickControlBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -195,14 +195,14 @@
     _showMenuBtn = [[UIButton alloc]init];
     _showMenuBtn.tag = DWInputBarControlBtnTypeMenu;
     [_showMenuBtn addTarget:self action:@selector(clickControlBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [_toolView addSubview:_showMenuBtn];
-    
+//    [_toolView addSubview:_showMenuBtn];
+
     _expressionView = [[NIMInputEmoticonContainerView alloc]initWithFrame:CGRectMake(0, 0, screenW, expressionViewH)];
     _expressionView.delegate = self;
     [self addSubview:_expressionView];
     _expressionView.hidden = YES;
 
-    
+
     self.functionView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenW, menuViewH)];
     [self addSubview:_functionView];
     _functionView.backgroundColor = [UIColor clearColor];
@@ -216,7 +216,7 @@
     [_showRecordeBtn setBackgroundImage:[UIImage imageNamed:@"voice"] forState:UIControlStateNormal];
     [_showRecordeBtn setBackgroundImage:[UIImage imageNamed:@"voice_HL"] forState:UIControlStateHighlighted];
     [_showRecordeBtn setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateSelected];
-    
+
 }
 
 - (void)setToolH:(CGFloat)toolH{
@@ -233,14 +233,14 @@
     _toolView.frame = CGRectMake(0, 0, screenW, _toolH);
 
     CGFloat btnY = _toolH - 1.5*_margin - btnWH;
-    _showRecordeBtn.frame = CGRectMake(_margin,btnY, btnWH, btnWH);
-    
-    CGFloat menuBtnX = screenW - _margin - btnWH;
-    _showMenuBtn.frame = CGRectMake(menuBtnX, btnY, btnWH, btnWH);
-    
-    CGFloat expressionBtnX = menuBtnX - 1.5*_margin - btnWH;
+//    _showRecordeBtn.frame = CGRectMake(_margin,btnY, btnWH, btnWH);
+
+//    CGFloat menuBtnX = screenW - _margin - btnWH;
+//    _showMenuBtn.frame = CGRectMake(menuBtnX, btnY, btnWH, btnWH);
+
+    CGFloat expressionBtnX = screenW - 1.5*_margin - btnWH;
     _showExpressionBtn.frame = CGRectMake(expressionBtnX, btnY, btnWH, btnWH);
-    
+
     CGFloat inputX = CGRectGetMaxX(_showRecordeBtn.frame)+1.5*_margin;
     CGFloat inputW = expressionBtnX - inputX - 1.5*_margin;
     CGFloat inputY = 1.6*_margin;
@@ -272,7 +272,7 @@
             CGRect rect = self.frame;
             rect.size.height -= diff;
             self.frame = rect;
-            
+
             self.toolH -= diff;
             self.inputViewHeight -= diff;
             if(!self.onChangeBarHeight) { return; }
@@ -292,11 +292,11 @@
     }
     if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
         //在这里做你响应return键的代码
-        
+
         NSArray *uuidArr = [self.atCache allAtUid:growingTextView.text];
         self.onSendTextMessage(@{@"text":growingTextView.text,@"IDArr":uuidArr});
         growingTextView.text = @"";
-        
+
         return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
     }
     return YES;

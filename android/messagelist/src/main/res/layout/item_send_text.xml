@@ -38,6 +38,8 @@
             android:id="@+id/aurora_tv_msgitem_message"
             style="@style/aurora_msgitem_msg_txt_style"
             android:autoLink="all"
+            android:padding="10dp"
+            android:lineSpacingMultiplier="1.1"
             android:textColor="@color/white"
             android:textIsSelectable="false"
             android:layout_width="wrap_content"

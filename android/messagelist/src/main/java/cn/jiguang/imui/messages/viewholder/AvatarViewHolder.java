@@ -24,7 +24,7 @@ public class AvatarViewHolder<MESSAGE extends IMessage>
         implements MsgListAdapter.DefaultMessageViewHolder {
 
     protected TextView mDateTv;
-    protected TextView mDisplayNameTv;
+//    protected TextView mDisplayNameTv;
     protected ImageView mAvatarIv;
     protected ImageButton mResendIb;
     protected ProgressBar mSendingPb;
@@ -37,7 +37,7 @@ public class AvatarViewHolder<MESSAGE extends IMessage>
         this.mIsSender = isSender;
         mDateTv = (TextView) itemView.findViewById(R.id.aurora_tv_msgitem_date);
         mAvatarIv = (ImageView) itemView.findViewById(R.id.aurora_iv_msgitem_avatar);
-        mDisplayNameTv = (TextView) itemView.findViewById(R.id.aurora_tv_msgitem_display_name);
+//        mDisplayNameTv = (TextView) itemView.findViewById(R.id.aurora_tv_msgitem_display_name);
         mResendIb = (ImageButton) itemView.findViewById(R.id.aurora_ib_msgitem_resend);
         mSendingPb = (ProgressBar) itemView.findViewById(R.id.aurora_pb_msgitem_sending);
 
@@ -64,10 +64,10 @@ public class AvatarViewHolder<MESSAGE extends IMessage>
             mAvatarIv.setVisibility(View.GONE);
         }
         if (!mIsSender) {
-            if (mDisplayNameTv.getVisibility() == View.VISIBLE) {
-                mDisplayNameTv.setMaxEms(8);
-                mDisplayNameTv.setText(message.getFromUser().getDisplayName());
-            }
+//            if (mDisplayNameTv.getVisibility() == View.VISIBLE) {
+//                mDisplayNameTv.setMaxEms(8);
+//                mDisplayNameTv.setText(message.getFromUser().getDisplayName());
+//            }
         } else {
             switch (message.getMessageStatus()) {
                 case SEND_SENDING:
@@ -146,12 +146,12 @@ public class AvatarViewHolder<MESSAGE extends IMessage>
             mDateTv.setTextColor(Color.WHITE);
             mDateTv.setTextSize(12);
         }
-        if (!mIsSender) {
-            if (mDisplayNameTv.getVisibility() == View.VISIBLE) {
-                mDisplayNameTv.setMaxEms(8);
-                mDisplayNameTv.setTextColor(Color.rgb(157,157,158));
-            }
-        }
+//        if (!mIsSender) {
+//            if (mDisplayNameTv.getVisibility() == View.VISIBLE) {
+//                mDisplayNameTv.setMaxEms(8);
+//                mDisplayNameTv.setTextColor(Color.rgb(157,157,158));
+//            }
+//        }
     }
 
     public ImageView getAvatar() {

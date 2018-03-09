@@ -2,7 +2,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <cn.jiguang.imui.view.ShapeImageView
+    <cn.jiguang.imui.view.CircleImageView
         android:id="@+id/aurora_iv_msgitem_avatar"
         style="@style/aurora_msgitem_sender_avatar_style"
         android:src="@drawable/aurora_headicon_default"

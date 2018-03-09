@@ -22,7 +22,7 @@
 
     <!-- chat input end -->
     <dimen name="imui_chat_space">4dp</dimen>
-    <dimen name="imui_chat_width">38dp</dimen>
-    <dimen name="imui_chat_input_width">38dp</dimen>
+    <dimen name="imui_chat_width">54dp</dimen>
+    <dimen name="imui_chat_input_width">54dp</dimen>
 
 </resources>

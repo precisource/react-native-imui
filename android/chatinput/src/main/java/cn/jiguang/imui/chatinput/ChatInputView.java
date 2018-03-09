@@ -65,7 +65,7 @@ public class ChatInputView extends LinearLayout {
 
     private ImageButton mVoiceBtn;
     private ImageButton mEmojiBtn;
-    private ImageButton mSendBtn;
+    private Button mSendBtn;
     private View mSendLayout;
     private View mActionLayout;
 
@@ -125,16 +125,16 @@ public class ChatInputView extends LinearLayout {
         mChatVoice = (Button) findViewById(R.id.imui_chat_voice);
         mVoiceBtn = (ImageButton) findViewById(R.id.imui_item_voice);
         mEmojiBtn = (ImageButton) findViewById(R.id.imui_item_emoji);
-        mSendBtn = (ImageButton) findViewById(R.id.imui_item_send);
+        mSendBtn = (Button) findViewById(R.id.imui_item_send);
 
         View voiceBtnContainer = findViewById(R.id.imui_layout_voice);
         View emojiBtnContainer = findViewById(R.id.imui_layout_emoji);
         mSendLayout = findViewById(R.id.imui_layout_send);
-        mActionLayout = findViewById(R.id.imui_layout_action);
+//        mActionLayout = findViewById(R.id.imui_layout_action);
         voiceBtnContainer.setOnClickListener(onMenuItemClickListener);
         emojiBtnContainer.setOnClickListener(onMenuItemClickListener);
         mSendLayout.setOnClickListener(onMenuItemClickListener);
-        mActionLayout.setOnClickListener(onMenuItemClickListener);
+//        mActionLayout.setOnClickListener(onMenuItemClickListener);
 
         mReceiveCount = (TextView) findViewById(R.id.imui_receive_count);
         mInputMarginLeft = (Space) findViewById(R.id.aurora_input_margin_left);
@@ -166,6 +166,10 @@ public class ChatInputView extends LinearLayout {
         mChatInput.setOnTouchListener(inputTouchListener);
 
         initKeyboard();
+    }
+
+    public void setOnFocusChangeListener(OnFocusChangeListener listener) {
+        mChatInput.setOnFocusChangeListener(listener);
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -246,11 +250,13 @@ public class ChatInputView extends LinearLayout {
     private OnTouchListener inputTouchListener = new OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-
+            Log.i("inputTouchListener: ", motionEvent + "" + mShowSoftInput);
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && !mShowSoftInput) {
+                Log.i("inputTouchListener: ", "inner");
                 mShowSoftInput = true;
                 invisibleMenuLayout();
                 showType = 0;
+                Log.i("inputTouchListener: ", mListener + "");
                 if (mListener != null) {
                     mListener.onFeatureView(inputHeight, showType);
                 }
@@ -267,8 +273,6 @@ public class ChatInputView extends LinearLayout {
                 if (onSubmit()) {
                     mChatInput.setText("");
                 }
-                changeSendToAction(true);
-
             } else if (view.getId() == R.id.imui_layout_voice) {
                 switchVoiceOrInput();
 
@@ -288,18 +292,19 @@ public class ChatInputView extends LinearLayout {
                     return;
                 }
 
-                if (view.getId() == R.id.imui_layout_action) {
-
-
-                    changeVoiceToInput(true);
-                    actionLayout.setVisibility(VISIBLE);
-                    emoticonPickerView.setVisibility(INVISIBLE);
-                    if (showType == 1) {
-                        mEmojiBtn.setImageResource(R.drawable.nim_message_button_bottom_emoji_selector);
-                    }
-                    showType = 2;
-
-                } else if (view.getId() == R.id.imui_layout_emoji) {
+//                if (view.getId() == R.id.imui_layout_action) {
+//
+//
+//                    changeVoiceToInput(true);
+//                    actionLayout.setVisibility(VISIBLE);
+//                    emoticonPickerView.setVisibility(INVISIBLE);
+//                    if (showType == 1) {
+//                        mEmojiBtn.setImageResource(R.drawable.nim_message_button_bottom_emoji_selector);
+//                    }
+//                    showType = 2;
+//
+//                } else
+                    if (view.getId() == R.id.imui_layout_emoji) {
 
                     showType = 1;
                     changeVoiceToInput(true);
@@ -368,11 +373,11 @@ public class ChatInputView extends LinearLayout {
                 endIndex = endIndex > s.length() ? s.length() : endIndex;
                 mEditTextListener.onTextChanged(s.subSequence(startIndex, endIndex).toString());
             }
-            if (s.length() >= 1 && start == 0 && before == 0) { // Starting input
-                changeSendToAction(false);
-            } else if (s.length() == 0 && before >= 1) { // Clear content
-                changeSendToAction(true);
-            }
+//            if (s.length() >= 1 && start == 0 && before == 0) { // Starting input
+//                changeSendToAction(false);
+//            } else if (s.length() == 0 && before >= 1) { // Clear content
+//                changeSendToAction(true);
+//            }
         }
 
         private int start;
@@ -414,17 +419,17 @@ public class ChatInputView extends LinearLayout {
         boolean empty = TextUtils.isEmpty(mInput);
         if (mChatInput.getVisibility() == VISIBLE) {
             changeVoiceToInput(false);
-            if (!empty) {
-                changeSendToAction(true);
-            }
+//            if (!empty) {
+//                changeSendToAction(true);
+//            }
 
             hideInputMethod();
 
         } else {
             changeVoiceToInput(true);
-            if (!empty) {
-                changeSendToAction(false);
-            }
+//            if (!empty) {
+//                changeSendToAction(false);
+//            }
             showInputMethod();
         }
         dismissMenuLayout();

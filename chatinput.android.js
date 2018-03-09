@@ -23,6 +23,7 @@ export default class ChatInput extends Component {
     this._onSendVoice = this._onSendVoice.bind(this);
     this._onShowKeyboard = this._onShowKeyboard.bind(this);
     this._onFeatureView = this._onFeatureView.bind(this);
+    this._onFocusChange = this._onFocusChange.bind(this)
     this._onEditTextChange = this._onEditTextChange.bind(this);
   }
 
@@ -59,6 +60,12 @@ export default class ChatInput extends Component {
       }
       this.props.onFeatureView(event.nativeEvent.inputHeight,event.nativeEvent.showType);
   }
+  _onFocusChange(event:Event) {
+      if (!this.props.onFocusChange) {
+        return;
+      }
+      this.props.onFocusChange(event.nativeEvent.focused);
+  }
   _onEditTextChange(event: Event) {
     if (!this.props.onEditTextChange) {
       return;
@@ -68,12 +75,13 @@ export default class ChatInput extends Component {
 
   render() {
     return (
-      <RCTChatInput 
-          {...this.props} 
+      <RCTChatInput
+          {...this.props}
           onSendText={this._onSendText}
           onSendVideo={this._onSendVideo}
           onSendVoice={this._onSendVoice}
           onShowKeyboard={this._onShowKeyboard}
+          onFocusChange={this._onFocusChange}
           onFeatureView={this._onFeatureView}
           onEditTextChange={this._onEditTextChange}
       />
