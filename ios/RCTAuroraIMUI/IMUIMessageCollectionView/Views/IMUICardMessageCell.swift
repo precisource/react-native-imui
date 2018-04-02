@@ -16,7 +16,7 @@ class IMUICardMessageCell: IMUIBaseMessageCell {
     var nameLable = UILabel()
     var lineView = UIView()
     var titleLable = UILabel()
-    let screenW = UIScreen.main.bounds.size.width
+    let screenW = UIScreen.main.bounds.size.width/64*25
     
     override init(frame: CGRect) {
         super.init(frame: frame)

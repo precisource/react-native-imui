@@ -63,7 +63,7 @@ public protocol IMUIMessageDataSource {
 open class IMUIMessageModel: NSObject, IMUIMessageModelProtocol {
   
   @objc public var duration: CGFloat
-    let screenW = UIScreen.main.bounds.size.width
+    let screenW = UIScreen.main.bounds.size.width/64*25
     let screenH = UIScreen.main.bounds.size.height
   
   open var msgId = {
@@ -153,22 +153,22 @@ open class IMUIMessageModel: NSObject, IMUIMessageModelProtocol {
       bubbleContentSize = CGSize(width: 120, height: 160)
       break
     case .location:
-        let locationW = UIScreen.main.bounds.width*0.625
+        let locationW = UIScreen.main.bounds.width/64*25*0.625
         let strTitle = self.customDict.object(forKey: "title") as! String
         let tmpSize = heightWithFont(font: UIFont.systemFont(ofSize: (screenW * 13 / 375)), fixedWidth: (locationW-15), text: strTitle)
-      bubbleContentSize = CGSize(width: locationW, height: UIScreen.main.bounds.width*0.625*0.5+tmpSize.height+15 )
+      bubbleContentSize = CGSize(width: locationW, height: UIScreen.main.bounds.width/64*25*0.625*0.5+tmpSize.height+15 )
       break
     case .notification:
         let strTitle = self.customDict.object(forKey: "tipMsg") as! String
         let tmpSize = heightWithFont(font: UIFont.systemFont(ofSize:  12), fixedWidth: (screenW*0.8), text: strTitle)
-        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width, height: tmpSize.height+10)
+        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width/64*25, height: tmpSize.height+10)
         isShowAvatar = false
         break
     case .redpacket:
-        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width*0.65, height: UIScreen.main.bounds.width*0.65*0.35)
+        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width/64*25*0.65, height: UIScreen.main.bounds.width/64*25*0.65*0.35)
         break
     case .transfer:
-        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width*0.65, height: UIScreen.main.bounds.width*0.65*0.35)
+        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width/64*25*0.65, height: UIScreen.main.bounds.width/64*25*0.65*0.35)
         break
     case .url:
         bubbleContentSize = CGSize(width: 100, height: 100)
@@ -177,14 +177,14 @@ open class IMUIMessageModel: NSObject, IMUIMessageModelProtocol {
         bubbleContentSize = CGSize(width: 200, height: 40)
         break
     case .redpacketOpen:
-        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width, height: 40)
+        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width/64*25, height: 40)
         isShowAvatar = false
         break
     case .card:
-        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width*0.65, height: UIScreen.main.bounds.width*0.65*0.35)
+        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width/64*25*0.65, height: UIScreen.main.bounds.width/64*25*0.65*0.35)
         break
     case .unknown:
-        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width, height: 40)
+        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width/64*25, height: 40)
         isShowAvatar = false
         break
         

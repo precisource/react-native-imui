@@ -23,7 +23,7 @@ class IMUIRedPacketOpenMessageCell: IMUIBaseMessageCell {
     var titleLable = UILabel()
     var redImg = UIImageView()
     var btnView = UIView()
-    let screenW = UIScreen.main.bounds.size.width
+    let screenW = UIScreen.main.bounds.size.width/64*25
     override init(frame: CGRect) {
         super.init(frame: frame)
         titleLable.textColor = UIColor.white

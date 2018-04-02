@@ -13,7 +13,7 @@ class IMUINotificationMessageCell: IMUIBaseMessageCell {
     
     var titleLable = UILabel()
     var backView = UIView()
-    let screenW = UIScreen.main.bounds.size.width
+    let screenW = UIScreen.main.bounds.size.width/64*25
     let labelGest = UITapGestureRecognizer.init()
     var locationIndex:Int = 0
     

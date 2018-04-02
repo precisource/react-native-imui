@@ -12,7 +12,7 @@
 #import <React/RCTComponent.h>
 #import "NIMInputEmoticonContainerView.h"
 
-#define screenW [UIScreen mainScreen].bounds.size.width
+#define screenW [UIScreen mainScreen].bounds.size.width / 64 * 25
 #define screenH [UIScreen mainScreen].bounds.size.height
 #define DESIGN_SIZE_750(length) (screenW*((length)/750.0)) //根据设计图算长度
 #define expressionViewH 216

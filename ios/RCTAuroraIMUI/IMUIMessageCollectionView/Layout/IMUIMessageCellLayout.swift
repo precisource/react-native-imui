@@ -40,7 +40,7 @@ open class IMUIMessageCellLayout: NSObject, IMUIMessageCellLayoutProtocal {
   public static var statusViewOffsetToBubble: UIOffset = UIOffset(horizontal: 12, vertical: 0)
   
 //  public static var bubbleMaxWidth: CGFloat = 180.0
-  public static var bubbleMaxWidth: CGFloat = UIScreen.main.bounds.width*0.55
+  public static var bubbleMaxWidth: CGFloat = UIScreen.main.bounds.width/64*25*0.55
   public static var isNeedShowInComingName = true
   public static var isNeedShowOutGoingName = false
   

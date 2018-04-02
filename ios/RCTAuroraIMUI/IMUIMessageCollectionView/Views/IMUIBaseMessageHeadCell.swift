@@ -31,7 +31,7 @@ open class IMUIBaseMessageHeadCell: UICollectionViewCell {
     }
     
     fileprivate func setupSubViews() {
-        self.actView.center = CGPoint(x:UIScreen.main.bounds.size.width*0.5,y:5)
+        self.actView.center = CGPoint(x:UIScreen.main.bounds.size.width/64*25*0.5,y:5)
         
 
     }

@@ -135,7 +135,7 @@ open class IMUIBaseMessageCell: UICollectionViewCell, IMUIMessageCellProtocal,Me
     self.bubbleView.backgroundColor = UIColor.clear
     self.timeLabel.text = message.timeString
     let timeW = widthWithFont(font: IMUIMessageCellLayout.timeStringFont, text: message.timeString)
-    let timeX = (UIScreen.main.bounds.size.width - timeW)*0.5
+    let timeX = (UIScreen.main.bounds.size.width/64*25 - timeW)*0.5
     var timeRect = self.timeBackView.frame;
     timeRect.size.width = timeW
     timeRect.origin.x = timeX

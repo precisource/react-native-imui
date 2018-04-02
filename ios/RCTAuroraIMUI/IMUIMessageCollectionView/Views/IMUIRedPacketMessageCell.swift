@@ -14,7 +14,7 @@ class IMUIRedPacketMessageCell: IMUIBaseMessageCell {
     var contentLable = UILabel()
     var tipsLabel = UILabel()
     var titleLable = UILabel()
-    let screenW = UIScreen.main.bounds.size.width
+    let screenW = UIScreen.main.bounds.size.width/64*25
     
     override init(frame: CGRect) {
         super.init(frame: frame)

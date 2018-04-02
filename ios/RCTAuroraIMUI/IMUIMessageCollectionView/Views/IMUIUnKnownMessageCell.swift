@@ -14,7 +14,7 @@ class IMUIUnKnownMessageCell: IMUIBaseMessageCell {
     var contView = UIView()
     var titleLable = UILabel()
     var updateBtn = UIButton()
-    let screenW = UIScreen.main.bounds.size.width
+    let screenW = UIScreen.main.bounds.size.width/64*25
     override init(frame: CGRect) {
         super.init(frame: frame)
         titleLable.textColor = UIColor.white

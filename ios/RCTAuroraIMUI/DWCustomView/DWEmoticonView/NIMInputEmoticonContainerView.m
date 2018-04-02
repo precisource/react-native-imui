@@ -17,7 +17,7 @@
 #import "UIImage+NIM.h"
 //#import "NIMKitUIConfig.h"
 
-#define sreenW [UIScreen mainScreen].bounds.size.width
+#define sreenW [UIScreen mainScreen].bounds.size.width / 64 * 25
 
 NSInteger NIMCustomPageControlHeight = 36;
 NSInteger NIMCustomPageViewHeight    = 159;

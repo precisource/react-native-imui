@@ -13,7 +13,7 @@ class IMUILocationMessageCell: IMUIBaseMessageCell {
     var imageView = UIImageView()
     var titleLable = UILabel()
     var subContentView = UIView()
-    let screenW = UIScreen.main.bounds.size.width
+    let screenW = UIScreen.main.bounds.size.width/64*25
     
     override init(frame: CGRect) {
         super.init(frame: frame)

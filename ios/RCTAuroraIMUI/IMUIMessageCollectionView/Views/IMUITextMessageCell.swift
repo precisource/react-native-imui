@@ -12,7 +12,7 @@ open class IMUITextMessageCell: IMUIBaseMessageCell {
 
   open static var outGoingTextColor = UIColor(netHex: 0x7587A8)
   open static var inComingTextColor = UIColor.white
-  open static let screenW = UIScreen.main.bounds.size.width
+  open static let screenW = UIScreen.main.bounds.size.width/64*25
   
     open static var outGoingTextFont = screenW<375 ? UIFont.systemFont(ofSize:15) : UIFont.systemFont(ofSize: (screenW * 16 / 375))
   open static var inComingTextFont = screenW<375 ? UIFont.systemFont(ofSize:15) : UIFont.systemFont(ofSize: (screenW * 16 / 375))

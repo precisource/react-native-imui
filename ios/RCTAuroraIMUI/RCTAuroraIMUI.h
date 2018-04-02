@@ -23,7 +23,7 @@
 
 //! Project version number for RCTAuroraIMUI.
 
-#define FONT_SIZE_375(size) [UIFont systemFontOfSize:([UIScreen mainScreen].bounds.size.width*((size)/375.0))]
+#define FONT_SIZE_375(size) [UIFont systemFontOfSize:([UIScreen mainScreen].bounds.size.width / 64 * 25*((size)/375.0))]
 
 FOUNDATION_EXPORT double RCTAuroraIMUIVersionNumber;
 

@@ -15,7 +15,7 @@
 #import "DWOrigScorllView.h"
 #import "DWShowImageVC.h"
 #import "DWRecoderCoveView.h"
-#define screenW [UIScreen mainScreen].bounds.size.width
+#define screenW [UIScreen mainScreen].bounds.size.width / 64 * 25
 #define screenH [UIScreen mainScreen].bounds.size.height
 
 

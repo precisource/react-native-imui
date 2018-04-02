@@ -67,7 +67,7 @@ open class IMUIMessageCollectionView: UIView {
   override open func layoutSubviews() {
     super.layoutSubviews()
 //    IMUIMessageCellLayout.cellWidth = self.imui_width
-    IMUIMessageCellLayout.cellWidth = UIScreen.main.bounds.size.width
+    IMUIMessageCellLayout.cellWidth = UIScreen.main.bounds.size.width/64*25
   }
   
   func setupMessageCollectionView() {
@@ -290,7 +290,7 @@ extension IMUIMessageCollectionView: UICollectionViewDelegate, UICollectionViewD
   }
     
     public   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: 30)
+        return CGSize(width: UIScreen.main.bounds.width/64*25, height: 30)
     }
 
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
