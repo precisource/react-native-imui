@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 
 public class ScrollMoreListener extends RecyclerView.OnScrollListener {
 
@@ -41,7 +42,7 @@ public class ScrollMoreListener extends RecyclerView.OnScrollListener {
 
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-        handler.sendEmptyMessageDelayed(1,150);
+        setStackFromEnd();
         if (mListener != null) {
             int lastVisibleItemPosition = 0;
             int firstVisibleItemPosition = 0;
@@ -87,29 +88,41 @@ public class ScrollMoreListener extends RecyclerView.OnScrollListener {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
-                setStackFromEnd();
+                try {
+                    ll.setStackFromEnd(false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (msg.what == 2) {
+                try {
+                    ll.setStackFromEnd(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            lastTime = System.currentTimeMillis();
         }
     };
+    LinearLayoutManager ll;
+    long lastTime = 0L;
 
     void setStackFromEnd() {
+        long current = System.currentTimeMillis();
+
+        Log.w("setStackFromEnd", "setStackFromEnd:" + (current - lastTime));
+        if (current - lastTime < 500L) {
+            return;
+        }
+
         if (mLayoutManager instanceof LinearLayoutManager) {
-            LinearLayoutManager ll = (LinearLayoutManager) mLayoutManager;
+            ll = (LinearLayoutManager) mLayoutManager;
             if (ll.getStackFromEnd()) {
                 if (ll.getChildCount() < mLayoutManager.getItemCount()) {
-                    try {
-                        ll.setStackFromEnd(false);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    handler.sendEmptyMessageDelayed(1, 150);
                 }
             } else {
                 if (ll.getChildCount() >= mLayoutManager.getItemCount()) {
-                    try {
-                        ll.setStackFromEnd(true);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    handler.sendEmptyMessageDelayed(2, 150);
                 }
             }
         }
