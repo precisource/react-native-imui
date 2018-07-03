@@ -89,13 +89,13 @@ public class ScrollMoreListener extends RecyclerView.OnScrollListener {
         public void handleMessage(Message msg) {
             if (msg.what == 1) {
                 try {
-                    ll.setStackFromEnd(false);
+//                    ll.setStackFromEnd(false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             } else if (msg.what == 2) {
                 try {
-                    ll.setStackFromEnd(true);
+//                    ll.setStackFromEnd(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
