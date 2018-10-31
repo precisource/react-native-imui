@@ -12,6 +12,7 @@ import cn.jiguang.imui.messagelist.module.RCTAccountNotice;
 import cn.jiguang.imui.messagelist.module.RCTBankTransfer;
 import cn.jiguang.imui.messagelist.module.RCTCard;
 import cn.jiguang.imui.messagelist.module.RCTExtend;
+import cn.jiguang.imui.messagelist.module.RCTFile;
 import cn.jiguang.imui.messagelist.module.RCTLink;
 import cn.jiguang.imui.messagelist.module.RCTLocation;
 import cn.jiguang.imui.messagelist.module.RCTMediaFile;
@@ -53,7 +54,7 @@ public class MessageUtil {
             case SEND_VIDEO:
             case RECEIVE_VIDEO:
             case SEND_FILE:
-            case RECEIVE_FILE:
+//            case RECEIVE_FILE:
             case SEND_IMAGE:
             case RECEIVE_IMAGE:
                 if (message.hasKey(MessageConstant.Message.EXTEND)) {
@@ -133,8 +134,8 @@ public class MessageUtil {
             case RECEIVE_CARD:
                 if (message.hasKey(MessageConstant.Message.EXTEND)) {
                     ext = message.getMap(MessageConstant.Message.EXTEND);
-                    extend = new RCTCard(ext.getString(MessageConstant.Card.type),ext.getString(MessageConstant.Card.name),
-                            ext.getString(MessageConstant.Card.imgPath),ext.getString(MessageConstant.Card.sessionId));
+                    extend = new RCTCard(ext.getString(MessageConstant.Card.type), ext.getString(MessageConstant.Card.name),
+                            ext.getString(MessageConstant.Card.imgPath), ext.getString(MessageConstant.Card.sessionId));
                 }
                 break;
             case CUSTOM:
@@ -145,6 +146,15 @@ public class MessageUtil {
             case SEND_TEXT:
             case RECEIVE_TEXT:
                 rctMsg.setText(message.getString(MessageConstant.Message.MSG_TEXT));
+                break;
+            case RECEIVE_FILE:
+                if (message.hasKey(MessageConstant.Message.EXTEND)) {
+                    ext = message.getMap(MessageConstant.Message.EXTEND);
+                    extend = new RCTFile(ext.getString(MessageConstant.File.PATH),
+                            (long) ext.getDouble(MessageConstant.File.SIZE), ext.getString(MessageConstant.File.MD5),
+                            ext.getString(MessageConstant.File.URL), ext.getString(MessageConstant.File.DISPLAY_NAME),
+                            ext.getString(MessageConstant.File.EXTENSION), ext.getBoolean(MessageConstant.File.FORCE_UPLOAD));
+                }
                 break;
             default:
                 rctMsg.setText(message.getString(MessageConstant.Message.MSG_TEXT));
@@ -183,7 +193,7 @@ public class MessageUtil {
         Log.d("AuroraIMUIModule", "configure message: " + chatInput);
         RCTMember input = new RCTMember(chatInput.getString(ChatInputConstant.Member.NAME),
                 chatInput.getString(ChatInputConstant.Member.CONTACT_ID));
-        if(chatInput.hasKey(ChatInputConstant.Member.ALIAS)){
+        if (chatInput.hasKey(ChatInputConstant.Member.ALIAS)) {
             input.setAlias(chatInput.getString(ChatInputConstant.Member.ALIAS));
         }
 

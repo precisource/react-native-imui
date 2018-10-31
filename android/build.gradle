@@ -11,13 +11,26 @@ android {
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '27.1.0'
+                }
+            }
         }
     }
 }
@@ -42,4 +55,5 @@ dependencies {
     compile project(':react-native-imui:chatinput')
     compile project(':react-native-imui:messagelist')
     compile project(':react-native-imui:popuptool')
+    compile'com.android.support:multidex:1.0.3'
 }
