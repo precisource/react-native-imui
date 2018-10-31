@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp">
 
-        <include layout="@layout/item_head_left"/>
+        <include layout="@layout/item_head_left" />
 
         <TextView
             android:id="@+id/aurora_tv_msgitem_display_name"
@@ -24,55 +24,54 @@
 
         <LinearLayout
             android:layout_marginTop="@dimen/aurora_message_padding_top"
-            android:id="@+id/item_layout"
+            android:id="@+id/layout_top"
             android:layout_marginLeft="@dimen/aurora_avatar_padding"
             android:layout_marginRight="@dimen/aurora_width_msg_avatar"
             android:layout_centerVertical="true"
             android:layout_below="@id/aurora_tv_msgitem_display_name"
             android:layout_toRightOf="@id/aurora_iv_msgitem_avatar"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/link_bg"
-            android:orientation="vertical">
+            android:background="@drawable/drr_recv_text_bubble"
+            android:padding="15dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/layout_top"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:duplicateParentState="true">
-
-                <ImageView
-                    android:id="@+id/file_icon"
-                    android:layout_margin="@dimen/red_packet_image_margin"
-                    android:src="@drawable/pdf_file"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp" />
                 <TextView
                     android:id="@+id/file_name"
-                    android:layout_toRightOf="@+id/file_icon"
-                    android:layout_marginTop="@dimen/red_packet_top"
-                    android:layout_centerVertical="true"
-                    android:textSize="@dimen/red_packet_comments_size"
-                    android:lines="1"
+                    android:textSize="15sp"
+                    android:lines="2"
+                    android:text="文件名"
                     android:ellipsize="end"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
+                    android:textColor="#333333"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
                 <TextView
-                    android:visibility="gone"
-                    android:id="@+id/file_id"
-                    android:layout_marginTop="3dp"
-                    android:layout_toRightOf="@+id/file_icon"
-                    android:layout_below="@+id/file_name"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/red_packet_text_size"
-                    android:layout_width="match_parent"
+                    android:id="@+id/file_size"
+                    android:text="文件大小"
+                    android:lines="1"
+                    android:layout_marginTop="1dp"
+                    android:textColor="#666666"
+                    android:textSize="15sp"
+                    android:ellipsize="end"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/link_card" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/file_icon"
+                android:src="@drawable/pdf_file"
+                android:layout_width="63dp"
+                android:layout_height="63dp" />
+
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

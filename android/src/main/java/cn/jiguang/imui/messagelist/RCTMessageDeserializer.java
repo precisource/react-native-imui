@@ -6,6 +6,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +16,7 @@ import cn.jiguang.imui.messagelist.module.RCTAccountNotice;
 import cn.jiguang.imui.messagelist.module.RCTBankTransfer;
 import cn.jiguang.imui.messagelist.module.RCTCard;
 import cn.jiguang.imui.messagelist.module.RCTExtend;
+import cn.jiguang.imui.messagelist.module.RCTFile;
 import cn.jiguang.imui.messagelist.module.RCTLink;
 import cn.jiguang.imui.messagelist.module.RCTLocation;
 import cn.jiguang.imui.messagelist.module.RCTMediaFile;
@@ -25,6 +28,15 @@ import cn.jiguang.imui.messagelist.module.RCTUser;
 
 public class RCTMessageDeserializer implements JsonDeserializer<RCTMessage> {
 
+    boolean getGsonBoolean(JsonObject ext, String key) {
+        JsonElement e = ext.get(key);
+        return e != null && e.getAsBoolean();
+    }
+
+    long getGsonLong(JsonObject ext, String key) {
+        JsonElement e = ext.get(key);
+        return e == null ? 0 : e.getAsLong();
+    }
 
     String getGsonString(JsonObject ext, String key) {
         JsonElement e = ext.get(key);
@@ -88,8 +100,8 @@ public class RCTMessageDeserializer implements JsonDeserializer<RCTMessage> {
                 case RECEIVE_VOICE:
                 case SEND_VIDEO:
                 case RECEIVE_VIDEO:
-                case SEND_FILE:
-                case RECEIVE_FILE:
+//                case SEND_FILE:
+//                case RECEIVE_FILE:
                 case SEND_IMAGE:
                 case RECEIVE_IMAGE:
                     if (jsonObject.has(MessageConstant.Message.EXTEND)) {
@@ -163,8 +175,20 @@ public class RCTMessageDeserializer implements JsonDeserializer<RCTMessage> {
                 case RECEIVE_CARD:
                     if (jsonObject.has(MessageConstant.Message.EXTEND)) {
                         ext = jsonObject.get(MessageConstant.Message.EXTEND).getAsJsonObject();
-                        extend = new RCTCard(getGsonString(ext, MessageConstant.Card.type),getGsonString(ext, MessageConstant.Card.name),
-                                getGsonString(ext, MessageConstant.Card.imgPath),getGsonString(ext, MessageConstant.Card.sessionId));
+                        extend = new RCTCard(getGsonString(ext, MessageConstant.Card.type), getGsonString(ext, MessageConstant.Card.name),
+                                getGsonString(ext, MessageConstant.Card.imgPath), getGsonString(ext, MessageConstant.Card.sessionId));
+                    }
+                    break;
+
+                case SEND_FILE:
+                case RECEIVE_FILE:
+                    if (jsonObject.has(MessageConstant.Message.EXTEND)) {
+                        ext = jsonObject.get(MessageConstant.Message.EXTEND).getAsJsonObject();
+                        RCTFile e = new RCTFile(getGsonString(ext, MessageConstant.File.PATH), getGsonLong(ext, MessageConstant.File.SIZE),
+                                getGsonString(ext, MessageConstant.File.MD5), getGsonString(ext, MessageConstant.File.URL),
+                                getGsonString(ext, MessageConstant.File.DISPLAY_NAME), getGsonString(ext, MessageConstant.File.EXTENSION),
+                                getGsonBoolean(ext, MessageConstant.File.FORCE_UPLOAD));
+                        extend = e;
                     }
                     break;
                 default:

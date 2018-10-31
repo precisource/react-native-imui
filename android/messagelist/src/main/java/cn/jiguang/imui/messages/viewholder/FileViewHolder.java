@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import cn.jiguang.imui.BuildConfig;
 import cn.jiguang.imui.R;
 import cn.jiguang.imui.commons.models.ICard;
+import cn.jiguang.imui.commons.models.IExtend;
 import cn.jiguang.imui.commons.models.IFile;
 import cn.jiguang.imui.commons.models.IMessage;
 import cn.jiguang.imui.messages.MessageListStyle;
@@ -21,23 +24,35 @@ import cn.jiguang.imui.messages.MessageListStyle;
 public class FileViewHolder<MESSAGE extends IMessage> extends AvatarViewHolder<MESSAGE> {
 
     private ImageView image;
-    private TextView name;
+    private TextView tvName;
+    private TextView tvSize;
     private View layoutTop;
 
     public FileViewHolder(RecyclerView.Adapter adapter, View itemView, boolean isSender) {
         super(adapter, itemView, isSender);
 
         image = (ImageView) itemView.findViewById(R.id.file_icon);
-        name = (TextView) itemView.findViewById(R.id.file_name);
+        tvName = (TextView) itemView.findViewById(R.id.file_name);
+        tvSize = (TextView) itemView.findViewById(R.id.file_size);
         layoutTop = itemView.findViewById(R.id.layout_top);
     }
 
     @Override
     public void onBind(final MESSAGE message) {
         super.onBind(message);
-        IFile file = getExtend(message);
-        if (file != null) {
-            name.setText(file.getDisplayName());
+        IExtend extend = getExtend(message);
+        if (extend != null && extend instanceof IFile) {
+            IFile file = (IFile)extend;
+            switch (file.getExtension().toLowerCase()) {
+                case "pdf":
+                    image.setImageResource(R.drawable.pdf_file);
+                    break;
+                default:
+                    image.setImageResource(R.drawable.unknown_file);
+                    break;
+            }
+            tvName.setText(file.getDisplayName());
+            tvSize.setText(String.format(Locale.US, "%.2fMB", ((float) file.getSize()) / 1024 / 1024));
         }
         layoutTop.setOnClickListener(new View.OnClickListener() {
             @Override
