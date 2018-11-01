@@ -35,6 +35,7 @@ open class RCTMessageModel: IMUIMessageModel {
     static let kMsgTypeCard = "card"
     static let kMsgTypeUnKnow = "unknown"
     static let kMsgTypeTip = "tip"
+  static let kMsgTypeFile = "file"
     
   static let kMsgKeyMsgId = "msgId"
   static let kMsgKeyFromUser = "fromUser"
@@ -263,6 +264,9 @@ open class RCTMessageModel: IMUIMessageModel {
       }else if typeString == RCTMessageModel.kMsgTypeTip {
         msgType = .notification
         customDict = messageDic.object(forKey: RCTMessageModel.kMsgKeyExtend) as! NSMutableDictionary
+      }else if typeString == RCTMessageModel.kMsgTypeFile {
+        msgType = .file
+        customDict = messageDic.object(forKey: RCTMessageModel.kMsgKeyExtend) as! NSMutableDictionary
       }else{
             msgType = .unknown
         }
@@ -401,7 +405,9 @@ open class RCTMessageModel: IMUIMessageModel {
       case .unknown:
         messageDic.setValue(RCTMessageModel.kMsgTypeUnKnow, forKey: RCTMessageModel.kMsgKeyMsgType)
         break
-        
+      case .file:
+        messageDic.setValue(RCTMessageModel.kMsgTypeFile, forKey: RCTMessageModel.kMsgKeyMsgType)
+        messageDic.setValue(self.customDict, forKey: RCTMessageModel.kMsgKeyExtend)
       default:
         break
       }

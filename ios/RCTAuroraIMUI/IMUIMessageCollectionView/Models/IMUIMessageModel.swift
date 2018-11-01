@@ -24,6 +24,7 @@ import UIKit
   case redpacketOpen
   case unknown
   case custom
+  case file
 }
 
 
@@ -187,7 +188,9 @@ open class IMUIMessageModel: NSObject, IMUIMessageModelProtocol {
         bubbleContentSize = CGSize(width: UIScreen.main.bounds.width, height: 40)
         isShowAvatar = false
         break
-        
+    case .file:
+        bubbleContentSize = CGSize(width: UIScreen.main.bounds.width*0.65, height: UIScreen.main.bounds.width*0.65*0.35)
+        break
     default:
       break
     }

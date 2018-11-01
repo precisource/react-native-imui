@@ -153,6 +153,7 @@
 		624B82DB1EE57482006C3C03 /* RCTMessageListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 623EA9801EE55CB200EC43AE /* RCTMessageListView.xib */; };
 		624B82DD1EE57653006C3C03 /* RCTAuroraIMUIModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 623EA9771EE55CB200EC43AE /* RCTAuroraIMUIModule.m */; };
 		6A40AB1E1FB2B95700946CE9 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A40AB1F1FB2B95700946CE9 /* libRCTWebSocket.a */; };
+		961FF338218AF7D700EC91E0 /* IMUIFileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FF337218AF7D700EC91E0 /* IMUIFileMessageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -333,6 +334,7 @@
 		623EA9A61EE55D0800EC43AE /* RCTAuroraIMUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTAuroraIMUITests.m; sourceTree = "<group>"; };
 		623EA9A81EE55D0800EC43AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A40AB1F1FB2B95700946CE9 /* libRCTWebSocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRCTWebSocket.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		961FF337218AF7D700EC91E0 /* IMUIFileMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMUIFileMessageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -632,6 +634,7 @@
 		4E77A38A1F30840000098CAF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				961FF337218AF7D700EC91E0 /* IMUIFileMessageCell.swift */,
 				4E77A38C1F30840000098CAF /* IMUIBaseMessageCell.swift */,
 				4E4EB39F1F5112F6009A5AF8 /* IMUIBaseMessageHeadCell.swift */,
 				4E77A38D1F30840000098CAF /* IMUIImageMessageCell.swift */,
@@ -900,6 +903,7 @@
 				4E2678B11F9061B5007F3996 /* NSParagraphStyle+YYText.m in Sources */,
 				4E2678B21F9061B5007F3996 /* UIPasteboard+YYText.m in Sources */,
 				4E2678B31F9061B5007F3996 /* UIView+YYText.m in Sources */,
+				961FF338218AF7D700EC91E0 /* IMUIFileMessageCell.swift in Sources */,
 				4E2678B41F9061B5007F3996 /* YYTextAsyncLayer.m in Sources */,
 				4E2678B51F9061B5007F3996 /* YYTextTransaction.m in Sources */,
 				4E2678B61F9061B5007F3996 /* YYTextUtilities.m in Sources */,
