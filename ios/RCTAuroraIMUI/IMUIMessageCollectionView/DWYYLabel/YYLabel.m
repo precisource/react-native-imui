@@ -140,10 +140,12 @@ static dispatch_queue_t YYLabelGetReleaseQueue() {
             [attrText appendAttributedString:attNum];
         }else{
             NSString *tmpText = token.text;
-            [attrText appendAttributedString:[[NSAttributedString alloc] initWithString:tmpText attributes:nil]];
+            NSMutableAttributedString *attTmp = [[NSMutableAttributedString alloc] initWithString:tmpText];
+            attTmp.yy_color = _textColor;
+            attTmp.yy_font = self.font;
+            [attrText appendAttributedString:attTmp];
         }
     }
-    attrText.yy_color = _textColor;
     attrText.yy_font = self.font;
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:5];//行间距
