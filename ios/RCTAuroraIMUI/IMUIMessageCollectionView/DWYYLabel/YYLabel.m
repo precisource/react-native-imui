@@ -125,7 +125,7 @@ static dispatch_queue_t YYLabelGetReleaseQueue() {
             NSMutableAttributedString *attUrl = [[NSMutableAttributedString alloc] initWithString:urlText];
             attUrl.yy_font = self.font;
             attUrl.yy_underlineStyle = NSUnderlineStyleSingle;
-            [attUrl yy_setTextTapHighlightRange:attUrl.yy_rangeOfAll color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000] backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
+            [attUrl yy_setTextTapHighlightRange:attUrl.yy_rangeOfAll color:underColor backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
                 [weakSelf tapMessageUrlText:urlText];
             }];
             [attrText appendAttributedString:attUrl];
@@ -134,7 +134,7 @@ static dispatch_queue_t YYLabelGetReleaseQueue() {
             NSMutableAttributedString *attNum = [[NSMutableAttributedString alloc] initWithString:numText];
             attNum.yy_font = self.font;
             attNum.yy_underlineStyle = NSUnderlineStyleSingle;
-            [attNum yy_setTextTapHighlightRange:attNum.yy_rangeOfAll color:[UIColor colorWithRed:0.093 green:0.492 blue:1.000 alpha:1.000] backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
+            [attNum yy_setTextTapHighlightRange:attNum.yy_rangeOfAll color:underColor backgroundColor:[UIColor colorWithWhite:0.000 alpha:0.220] tapAction:^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect){
                 [weakSelf tapMessagePhoneText:numText];
             }];
             [attrText appendAttributedString:attNum];
@@ -143,6 +143,7 @@ static dispatch_queue_t YYLabelGetReleaseQueue() {
             [attrText appendAttributedString:[[NSAttributedString alloc] initWithString:tmpText attributes:nil]];
         }
     }
+    attrText.yy_color = _textColor;
     attrText.yy_font = self.font;
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:5];//行间距

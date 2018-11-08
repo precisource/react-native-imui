@@ -61,12 +61,12 @@ open class IMUITextMessageCell: IMUIBaseMessageCell {
 
     
     if isOutGoing {
-        self.textMessageLable.setupYYText(text, andUnunderlineColor: UIColor.init(red: 187/255.0, green: 220/255.0, blue: 255/255.0, alpha: 1))
-        textMessageLable.textColor = UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
+      textMessageLable.textColor = UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
+      self.textMessageLable.setupYYText(text, andUnunderlineColor: UIColor.init(red: 39/255.0, green: 130/255.0, blue: 214/255.0, alpha: 1))
         
     } else {
-        self.textMessageLable.setupYYText(text, andUnunderlineColor: UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 1))
-        textMessageLable.textColor = UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
+      textMessageLable.textColor = UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
+      self.textMessageLable.setupYYText(text, andUnunderlineColor: UIColor.init(red: 39/255.0, green: 130/255.0, blue: 214/255.0, alpha: 1))
       
     }
     weak var weakSelf = self
