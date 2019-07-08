@@ -77,7 +77,7 @@ open class IMUITextMessageCell: IMUIBaseMessageCell {
         print("numBlock:-----------\(strNum)")
         let strNUm = URL.init(string: ("telprompt://"+strNum))
         if #available(iOS 10.0, *) {
-            UIApplication.shared.open(strNUm!, options: [:], completionHandler: nil)
+            UIApplication.shared.open(strNUm!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         } else {
             UIApplication.shared.openURL(strNUm!)
         }
@@ -93,4 +93,9 @@ open class IMUITextMessageCell: IMUIBaseMessageCell {
     }
     
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

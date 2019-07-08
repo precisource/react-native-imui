@@ -23,7 +23,7 @@ class IMUIFileMessageCell: IMUIBaseMessageCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     backView.backgroundColor = UIColor.clear
-    iconImg.contentMode = UIViewContentMode.scaleAspectFill
+    iconImg.contentMode = UIView.ContentMode.scaleAspectFill
     
     fileNameLabel.textColor = UIColor(rgb: 0x333333, a: 15)
     fileNameLabel.font = UIFont(name: "PingFangSC-Regular", size: 15)
@@ -122,7 +122,7 @@ class IMUIFileMessageCell: IMUIBaseMessageCell {
       return CGSize.zero
     }
     let size = CGSize(width:fixedWidth, height:CGFloat(MAXFLOAT))
-    let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: [NSFontAttributeName : font], context:nil)
+    let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font]), context:nil)
     
     return rect.size
   }
@@ -138,3 +138,14 @@ class IMUIFileMessageCell: IMUIBaseMessageCell {
 }
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}

@@ -86,7 +86,7 @@ open class IMUIMessageCollectionView: UIView {
     self.messageCollectionView.register(IMUITransferMessageCell.self, forCellWithReuseIdentifier: IMUITransferMessageCell.self.description())
     self.messageCollectionView.register(IMUIRedPacketOpenMessageCell.self, forCellWithReuseIdentifier: IMUIRedPacketOpenMessageCell.self.description())
     self.messageCollectionView.register(IMUIUnKnownMessageCell.self, forCellWithReuseIdentifier: IMUIUnKnownMessageCell.self.description())
-    self.messageCollectionView.register(IMUIBaseMessageHeadCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headView")
+    self.messageCollectionView.register(IMUIBaseMessageHeadCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headView")
     self.messageCollectionView.register(IMUICardMessageCell.self, forCellWithReuseIdentifier: IMUICardMessageCell.self.description())
     self.messageCollectionView.register(IMUIFileMessageCell.self, forCellWithReuseIdentifier: IMUIFileMessageCell.self.description())
     
@@ -96,7 +96,7 @@ open class IMUIMessageCollectionView: UIView {
     self.messageCollectionView.addGestureRecognizer(self.cellGesture)
   }
   
-    func tapCollectionView(){//点击整个cell，隐藏键盘
+    @objc func tapCollectionView(){//点击整个cell，隐藏键盘
         self.delegate?.messageCollectionView?(tapCellView: "")
     }
 
@@ -216,7 +216,7 @@ open class IMUIMessageCollectionView: UIView {
     }
     
     //通知方法
-    func clickStopPlayActivity(notification: Notification){
+    @objc func clickStopPlayActivity(notification: Notification){
         DispatchQueue.main.async(execute: {
             self.headView.stopActView()
         })
@@ -331,7 +331,7 @@ extension IMUIMessageCollectionView: UICollectionViewDelegate, UICollectionViewD
     }
 
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let headCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headView", for: indexPath) as! IMUIBaseMessageHeadCell
+        let headCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headView", for: indexPath) as! IMUIBaseMessageHeadCell
         self.headView = headCell
         return headCell
     }

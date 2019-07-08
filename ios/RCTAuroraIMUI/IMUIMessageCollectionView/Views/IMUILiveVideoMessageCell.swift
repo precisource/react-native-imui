@@ -35,7 +35,7 @@ class IMUILiveVideoMessageCell: IMUIBaseMessageCell {
     super.presentCell(with: message, viewCache: viewCache, delegate: delegate)
     self.layoutVideo(with: message.mediaFilePath())
     let layout = message.layout as! IMUIMessageCellLayout
-    self.videoView.frame = UIEdgeInsetsInsetRect(CGRect(origin: CGPoint.zero, size: layout.bubbleFrame.size), layout.bubbleContentInset)
+    self.videoView.frame = CGRect(origin: CGPoint.zero, size: layout.bubbleFrame.size).inset(by: layout.bubbleContentInset)
   }
   
   func layoutVideo(with videoPath: String) {

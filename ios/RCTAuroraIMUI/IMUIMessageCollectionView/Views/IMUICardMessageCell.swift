@@ -21,7 +21,7 @@ class IMUICardMessageCell: IMUIBaseMessageCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backView.backgroundColor = UIColor.white
-        iconImg.contentMode = UIViewContentMode.scaleAspectFill
+        iconImg.contentMode = UIView.ContentMode.scaleAspectFill
         nameLable.textColor = UIColor.black
         nameLable.font = UIFont.systemFont(ofSize: (screenW * 18 / 375))
         lineView.backgroundColor = UIColor.init(red: 230/255.0, green: 230/255.0, blue: 230/255.0, alpha: 1.0)
@@ -80,7 +80,7 @@ class IMUICardMessageCell: IMUIBaseMessageCell {
             return CGSize.zero
         }
         let size = CGSize(width:fixedWidth, height:CGFloat(MAXFLOAT))
-        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: [NSFontAttributeName : font], context:nil)
+        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font]), context:nil)
         
         return rect.size
     }
@@ -88,3 +88,14 @@ class IMUICardMessageCell: IMUIBaseMessageCell {
 }
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}

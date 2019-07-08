@@ -19,7 +19,7 @@ class IMUIRedPacketMessageCell: IMUIBaseMessageCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundImg.image = UIImage.init(named: "redPacket")
-        backgroundImg.contentMode = UIViewContentMode.scaleAspectFill
+        backgroundImg.contentMode = UIView.ContentMode.scaleAspectFill
         contentLable.textColor = UIColor.white
         contentLable.font = UIFont.systemFont(ofSize: (screenW * 15 / 375))
         tipsLabel.textColor = UIColor.white
@@ -76,10 +76,21 @@ class IMUIRedPacketMessageCell: IMUIBaseMessageCell {
         }
         
         let size = CGSize(width:fixedWidth, height:CGFloat(MAXFLOAT))
-        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: [NSFontAttributeName : font], context:nil)
+        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font]), context:nil)
         
         return rect.size
     }
     
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}

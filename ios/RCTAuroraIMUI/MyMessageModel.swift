@@ -63,20 +63,20 @@ open class RCTMessageModel: IMUIMessageModel {
 
   static open var outgoingBubbleImage: UIImage = {
     var bubbleImg = UIImage.imuiImage(with: "outGoing_bubble")
-    bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(24, 10, 9, 15), resizingMode: .tile)
+    bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsets.init(top: 24, left: 10, bottom: 9, right: 15), resizingMode: .tile)
     return bubbleImg!
   }()
   
   static open var incommingBubbleImage: UIImage = {
     var bubbleImg = UIImage.imuiImage(with: "inComing_bubble")
-    bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(24, 15, 9, 10), resizingMode: .tile)
+    bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsets.init(top: 24, left: 15, bottom: 9, right: 10), resizingMode: .tile)
     return bubbleImg!
   }()
     static open var blueBubbleImage: UIImage = {
         let bundle = Bundle.imuiBundle()
         let imagePath = bundle.path(forResource: "bubble_blue@2x", ofType: "png")
         var bubbleImg = UIImage(contentsOfFile: imagePath!)
-        bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(23, 23, 23, 23), resizingMode: .tile)
+        bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsets.init(top: 23, left: 23, bottom: 23, right: 23), resizingMode: .tile)
         return bubbleImg!
     }()
     
@@ -84,7 +84,7 @@ open class RCTMessageModel: IMUIMessageModel {
         let bundle = Bundle.imuiBundle()
         let imagePath = bundle.path(forResource: "bubble_white@2x", ofType: "png")
         var bubbleImg = UIImage(contentsOfFile: imagePath!)
-        bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(23, 23, 23, 23), resizingMode: .tile)
+        bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsets.init(top: 23, left: 23, bottom: 23, right: 23), resizingMode: .tile)
         return bubbleImg!
     }()
   //时间戳转时间
