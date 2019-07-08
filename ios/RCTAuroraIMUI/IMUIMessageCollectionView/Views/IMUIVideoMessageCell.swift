@@ -47,7 +47,7 @@ class IMUIVideoMessageCell: IMUIBaseMessageCell {
     super.presentCell(with: message, viewCache: viewCache, delegate: delegate)
     self.layoutVideo(with: message.mediaFilePath())
     let layout = message.layout
-    self.videoView.frame = UIEdgeInsetsInsetRect(CGRect(origin: CGPoint.zero, size: layout.bubbleFrame.size), layout.bubbleContentInset)
+    self.videoView.frame = CGRect(origin: CGPoint.zero, size: layout.bubbleFrame.size).inset(by: layout.bubbleContentInset)
   }
   
   func layoutVideo(with videoPath: String) {
@@ -67,7 +67,7 @@ class IMUIVideoMessageCell: IMUIBaseMessageCell {
       do {
         let imgGenerator = AVAssetImageGenerator(asset: asset)
         imgGenerator.appliesPreferredTrackTransform = true
-        let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+        let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(value: 0, timescale: 1), actualTime: nil)
         DispatchQueue.main.async {
           self.videoView.image = UIImage(cgImage: cgImage)
         }

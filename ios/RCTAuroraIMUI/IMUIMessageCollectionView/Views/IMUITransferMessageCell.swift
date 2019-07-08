@@ -19,7 +19,7 @@ class IMUITransferMessageCell: IMUIBaseMessageCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundImg.image = UIImage.init(named: "transfer")
-        backgroundImg.contentMode = UIViewContentMode.scaleToFill
+        backgroundImg.contentMode = UIView.ContentMode.scaleToFill
         contentLable.textColor = UIColor.white
         contentLable.font = UIFont.systemFont(ofSize: (screenW * 16 / 375))
         amountLabel.textColor = UIColor.white
@@ -57,7 +57,7 @@ class IMUITransferMessageCell: IMUIBaseMessageCell {
         let strTmpAmount = String(format: "%0.2f",Float(strAmount)!)
         amountLabel.text = strTmpAmount + " 元"
         
-        self.backgroundImg.frame = UIEdgeInsetsInsetRect(CGRect(origin: CGPoint.zero, size: layout.bubbleFrame.size), layout.bubbleContentInset)
+        self.backgroundImg.frame = CGRect(origin: CGPoint.zero, size: layout.bubbleFrame.size).inset(by: layout.bubbleContentInset)
         let contentX = layout.bubbleFrame.size.width * 0.26
         let contentW = layout.bubbleFrame.size.width * 0.7
         
@@ -83,7 +83,7 @@ class IMUITransferMessageCell: IMUIBaseMessageCell {
         }
         
         let size = CGSize(width:fixedWidth, height:CGFloat(MAXFLOAT))
-        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: [NSFontAttributeName : font], context:nil)
+        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font]), context:nil)
         
         return rect.size
     }
@@ -91,3 +91,14 @@ class IMUITransferMessageCell: IMUIBaseMessageCell {
 }
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}

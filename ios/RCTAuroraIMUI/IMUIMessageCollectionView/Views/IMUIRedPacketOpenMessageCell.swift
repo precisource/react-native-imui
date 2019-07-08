@@ -52,7 +52,7 @@ class IMUIRedPacketOpenMessageCell: IMUIBaseMessageCell {
         super.layoutSubviews()
     }
     
-    func clickTapRedView() {
+    @objc func clickTapRedView() {
         self.delegate?.messageCollectionView?(didTapMessageBubbleInCell: self, model: self.message!)
     }
     
@@ -83,10 +83,10 @@ class IMUIRedPacketOpenMessageCell: IMUIBaseMessageCell {
             let btnX = strRedW * CGFloat(tmpRange.location) + margin*0.5
             let btnW = strRedW * 2;
             let tmpBtn = UIButton.init(frame: CGRect(origin: CGPoint(x:btnX, y:0), size: CGSize(width:btnW, height:contentH)))
-            tmpBtn.addTarget(self, action: #selector(self.clickTapRedView), for: UIControlEvents.touchUpInside)
+            tmpBtn.addTarget(self, action: #selector(self.clickTapRedView), for: UIControl.Event.touchUpInside)
             tmpBtn.backgroundColor = UIColor.clear
             btnView.addSubview(tmpBtn)
-            attString.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 216/255.0, green: 38/255.0, blue: 23/255.0, alpha: 1), range: tmpRange)
+            attString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.init(red: 216/255.0, green: 38/255.0, blue: 23/255.0, alpha: 1), range: tmpRange)
         }
         self.titleLable.attributedText = attString
         let contentX = (layout.bubbleFrame.size.width - titleW - redImgW - redImgX )*0.5
@@ -105,7 +105,7 @@ class IMUIRedPacketOpenMessageCell: IMUIBaseMessageCell {
         }
         
         let size = CGSize(width:maxWidth, height:CGFloat(MAXFLOAT))
-        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: [NSFontAttributeName : font], context:nil)
+        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font]), context:nil)
         
         return rect.size.width + self.margin
     }
@@ -126,3 +126,14 @@ class IMUIRedPacketOpenMessageCell: IMUIBaseMessageCell {
 
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}

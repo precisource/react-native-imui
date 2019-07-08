@@ -212,7 +212,7 @@ open class IMUIBaseMessageCell: UICollectionViewCell, IMUIMessageCellProtocal,Me
             return 0
         }
         let size = CGSize(width:CGFloat(MAXFLOAT), height:CGFloat(MAXFLOAT))
-        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: [NSFontAttributeName : font], context:nil)
+        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font]), context:nil)
         
         return rect.size.width+10
     }
@@ -223,7 +223,7 @@ open class IMUIBaseMessageCell: UICollectionViewCell, IMUIMessageCellProtocal,Me
     self.delegate = delegate
   }
   
-  func tapBubbleView() {
+  @objc func tapBubbleView() {
     UIApplication.shared.keyWindow?.endEditing(true)
     if self.message?.type == .text {
 //        self.delegate?.messageCollectionView?(tapCellView: "")
@@ -238,16 +238,16 @@ open class IMUIBaseMessageCell: UICollectionViewCell, IMUIMessageCellProtocal,Me
     }
   }
     
-    func tapCellView(){//点击整个cell，隐藏键盘
+    @objc func tapCellView(){//点击整个cell，隐藏键盘
 //        self.delegate?.messageCollectionView?(tapCellView: "")
         UIApplication.shared.keyWindow?.endEditing(true)
     }
     
     
     
-  func longTapBubbleView(sender : UILongPressGestureRecognizer) {
+  @objc func longTapBubbleView(sender : UILongPressGestureRecognizer) {
 
-    if sender.state == UIGestureRecognizerState.began && self.message?.messageStatus != .sending{
+    if sender.state == UIGestureRecognizer.State.began && self.message?.messageStatus != .sending{
         if self.message?.type == .notification || self.message?.type == .redpacketOpen || self.message?.type == .unknown {
             return
         }
@@ -282,13 +282,13 @@ open class IMUIBaseMessageCell: UICollectionViewCell, IMUIMessageCellProtocal,Me
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "kClickLongTouchShowMenuNotification"), object: obj)
     }
     
-  func tapHeaderImage() {
+  @objc func tapHeaderImage() {
     self.delegate?.messageCollectionView?(didTapHeaderImageInCell: self, model: self.message!)
   }
   //长按头像
-    func longTapAvatarPress(sender : UILongPressGestureRecognizer){
+    @objc func longTapAvatarPress(sender : UILongPressGestureRecognizer){
         if !(self.message?.isOutGoing)! {
-            if sender.state == UIGestureRecognizerState.began{
+            if sender.state == UIGestureRecognizer.State.began{
                 self.delegate?.messageCollectionView?(longTapAvatarPressWithModel: self.message!)
                
             }
@@ -296,7 +296,7 @@ open class IMUIBaseMessageCell: UICollectionViewCell, IMUIMessageCellProtocal,Me
     }
     
     
-  func tapSatusView() {
+  @objc func tapSatusView() {
     self.delegate?.messageCollectionView?(didTapStatusViewInCell: self, model: self.message!)
 //    let alter = UIAlertView.init(title: "重发该消息？", message: "", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定")
 //    alter.show()
@@ -323,4 +323,15 @@ open class IMUIBaseMessageCell: UICollectionViewCell, IMUIMessageCellProtocal,Me
     }
     
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }

@@ -67,7 +67,7 @@ class IMUIVoiceMessageCell: IMUIBaseMessageCell {
         }
   }
     
-    func clickStopVoice(notification: NSNotification){
+    @objc func clickStopVoice(notification: NSNotification){
         UIDevice.current.isProximityMonitoringEnabled = false
         IMUIAudioPlayerHelper.sharedInstance.stopAudio()
     }
@@ -81,7 +81,7 @@ class IMUIVoiceMessageCell: IMUIBaseMessageCell {
     mediaFilePath = message.mediaFilePath()
   }
     
-    func clickTapVoiceView(notification: NSNotification)  {
+    @objc func clickTapVoiceView(notification: NSNotification)  {
         DispatchQueue.main.sync {
             let notiMsgID:String = notification.object as! String
             if  self.cellMsgID == notiMsgID {

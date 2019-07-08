@@ -204,7 +204,7 @@ open class IMUIMessageModel: NSObject, IMUIMessageModelProtocol {
         }
         
         let size = CGSize(width:fixedWidth, height:CGFloat(MAXFLOAT))
-        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: [NSFontAttributeName : font], context:nil)
+        let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font) : font]), context:nil)
         
         return rect.size
     }
@@ -235,13 +235,24 @@ open class IMUIMessageModel: NSObject, IMUIMessageModelProtocol {
     var bubbleImg: UIImage?
     if isOutGoing {
       bubbleImg = UIImage.imuiImage(with: "outGoing_bubble")
-      bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(24, 10, 9, 15), resizingMode: .tile)
+      bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsets.init(top: 24, left: 10, bottom: 9, right: 15), resizingMode: .tile)
     } else {
       bubbleImg = UIImage.imuiImage(with: "inComing_bubble")
-      bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsetsMake(24, 15, 9, 10), resizingMode: .tile)
+      bubbleImg = bubbleImg?.resizableImage(withCapInsets: UIEdgeInsets.init(top: 24, left: 15, bottom: 9, right: 10), resizingMode: .tile)
     }
     
     return bubbleImg!
   }
   
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }

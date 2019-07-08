@@ -37,17 +37,17 @@ public class IMUIAudioPlayerHelper: NSObject {
     
   }
   
-    func  sensorStateChange(notification:Notification) {
+    @objc func  sensorStateChange(notification:Notification) {
         if UIDevice.current.proximityState {
             do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord)
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playAndRecord)))
                 
             }catch let error as NSError {
                 print("set category fail \(error)")
             }
         }else{
             do {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)))
                 
             }catch let error as NSError {
                 print("set category fail \(error)")
@@ -59,9 +59,9 @@ public class IMUIAudioPlayerHelper: NSObject {
     do {
       self.playProgressCallback = progressCallback
       self.playFinishCallback = finishCallBack
-      try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)))
       updater = CADisplayLink(target: self, selector: #selector(self.trackAudio))
-      updater.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+      updater.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
       updater.frameInterval = 1
     } catch let error as NSError {
       print("set category fail \(error)")
@@ -83,7 +83,7 @@ public class IMUIAudioPlayerHelper: NSObject {
     UIDevice.current.isProximityMonitoringEnabled = true
   }
   
-  func trackAudio() {
+  @objc func trackAudio() {
     self.playProgressCallback?(player.currentTime, player.duration)
   }
   
@@ -95,7 +95,7 @@ public class IMUIAudioPlayerHelper: NSObject {
   
   func resumePlayingAudio() {
     self.player?.play()
-    updater.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+    updater.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
   }
   
   func stopAudio() {
@@ -120,4 +120,9 @@ extension IMUIAudioPlayerHelper: AVAudioPlayerDelegate {
     self.stopAudio()
     self.playFinishCallback?()
   }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
 }
